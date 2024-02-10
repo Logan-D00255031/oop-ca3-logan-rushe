@@ -9,66 +9,52 @@ public class Q6 {
         boolean run = true;
         while (run) {
             System.out.println("Current Shares (First - Last): " + blocks);
-            System.out.println("1: Buy\n2: Sell");
-            int choice = input.nextInt();
-            switch (choice) {
-                case 1 -> {
-                    blocks.add(buy());
-                    System.out.println();
+            System.out.println("Commands:\nBuy (int)amount (double)price\nSell (int)amount (double)price\nQuit");
+            String choice = input.next();
+            if (choice.equalsIgnoreCase("buy")) {
+                int amount = input.nextInt();
+                double price = input.nextDouble();
+                blocks.add(new Block(amount, price));
+                System.out.println();
+            } else if (choice.equalsIgnoreCase("sell")) {
+                int amount = input.nextInt();
+                double price = input.nextDouble();
+                double profit = 0;
+                //System.out.println(blocks);
+                Block block = blocks.peek();
+                while (amount > 0 && !blocks.isEmpty()) {
+                    //System.out.println(block);
+                    // Amount is the same as shares in current block
+                    if (block.getShares() == amount) {
+                        //System.out.println(1);
+                        double total = block.getPrice() * block.getShares();
+                        profit += (amount * price) - total;
+                        amount = 0;
+                        blocks.remove();
+                    } // Amount is the less than shares in current block
+                    else if (block.getShares() > amount) {
+                        //System.out.println(2);
+                        int diff = block.getShares() - amount;
+                        double total = block.getPrice() * amount;
+                        profit += (amount * price) - total;
+                        amount = 0;
+                        block.setShares(diff);
+                    } // Amount is the greater than shares in current block
+                    else {
+                        //System.out.println(3);
+                        double total = block.getPrice() * block.getShares();
+                        profit += (block.getShares() * price) - total;
+                        blocks.remove();
+                        amount -= block.getShares();
+                        block = blocks.peek();
+                    }
+                    //System.out.println(amount);
                 }
-                case 2 -> sell(blocks);
-                default -> {
-                    System.out.println("\nGoodbye.");
-                    run = false;
-                }
+                System.out.printf("Profit: %.2f\n\n", profit);
+            } else if (choice.equalsIgnoreCase("quit")) {
+                System.out.println("\nGoodbye.");
+                run = false;
             }
         }
-    }
-
-    static Block buy() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("How many?");
-        int amount = input.nextInt();
-        System.out.println("Buy price?");
-        int price = input.nextInt();
-        return new Block(amount, price);
-    }
-
-    static void sell(Deque blocks) {
-        Scanner input = new Scanner(System.in);
-        int profit = 0;
-        System.out.println("How many?");
-        int amount = input.nextInt();
-        System.out.println("Sell price?");
-        int price = input.nextInt();
-        //System.out.println(blocks);
-        Block block = (Block) blocks.peek();
-        while (amount > 0 && !blocks.isEmpty()) {
-            //System.out.println(block);
-            if (block.getShares() == amount) {
-                //System.out.println(1);
-                int total = block.getPrice() * block.getShares();
-                profit += (amount * price) - total;
-                amount = 0;
-                blocks.remove();
-            } else if (block.getShares() > amount) {
-                //System.out.println(2);
-                int diff = block.getShares() - amount;
-                int total = block.getPrice() * amount;
-                profit += (amount * price) - total;
-                amount = 0;
-                block.setShares(diff);
-            } else {
-                //System.out.println(3);
-                int total = block.getPrice() * block.getShares();
-                profit += (block.getShares() * price) - total;
-                blocks.remove();
-                amount -= block.getShares();
-                block = (Block) blocks.peek();
-            }
-            //System.out.println(amount);
-        }
-        System.out.println("Profit: " + profit);
-        System.out.println();
     }
 }

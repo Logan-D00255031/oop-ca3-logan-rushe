@@ -2,9 +2,9 @@ import java.util.Objects;
 
 public class Block {
     private int shares;
-    private final int price;
+    private final double price;
 
-    public Block(int shares, int price) {
+    public Block(int shares, double price) {
         this.shares = shares;
         this.price = price;
     }
@@ -13,7 +13,7 @@ public class Block {
         return shares;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -37,8 +37,8 @@ public class Block {
     @Override
     public String toString() {
         return "Block{" +
-                "shares=" + shares +
-                ", price=" + price +
+                "shares = " + shares +
+                ", price = " + price +
                 '}';
     }
 }
