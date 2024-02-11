@@ -1,4 +1,5 @@
 import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class Q5 {
     public static void main(String[] args) {
@@ -13,26 +14,26 @@ public class Q5 {
 
     }
 
-    private final ArrayDeque<String> takeoffQueue = new ArrayDeque<>();
-    private final ArrayDeque<String> landQueue = new ArrayDeque<>();
+    private final Queue<String> takeoffQueue = new ArrayDeque<>();
+    private final Queue<String> landQueue = new ArrayDeque<>();
 
     public Q5() {
 
     }
 
     public void takeoff(String flightSymbol) {
-        takeoffQueue.push(flightSymbol);
+        takeoffQueue.add(flightSymbol);
     }
 
     public void land(String flightSymbol) {
-        landQueue.push(flightSymbol);
+        landQueue.add(flightSymbol);
     }
     public void next() {
         if (!landQueue.isEmpty()) {
-            System.out.println(landQueue.removeLast() + " Has landed.");
+            System.out.println(landQueue.remove() + " Has landed.");
         }
         else {
-            System.out.println(takeoffQueue.removeLast() + " Has taken off.");
+            System.out.println(takeoffQueue.remove() + " Has taken off.");
         }
     }
 }

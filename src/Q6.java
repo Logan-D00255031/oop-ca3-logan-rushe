@@ -1,10 +1,10 @@
 import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Q6 {
     public static void main(String[] args) {
-        Deque<Block> blocks = new ArrayDeque<>();
+        Queue<Block> blocks = new ArrayDeque<>();
         Scanner input = new Scanner(System.in);
         boolean run = true;
         while (run) {
