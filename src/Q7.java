@@ -5,12 +5,14 @@ public class Q7 {
         Map<String, Queue<Block>> queueMap = new HashMap<>();
         Scanner input = new Scanner(System.in);
         boolean run = true;
+        // Run loop
         while (run) {
             // Display stocks in each company
             for (Map.Entry<String, Queue<Block>> company : queueMap.entrySet()) {
                 System.out.println("Company: " + company.getKey());
                 System.out.println("Current Shares (First - Last): " + company.getValue());
             }
+            // Display commands
             System.out.println("Commands:\nBuy (String)symbol (int)amount (double)price\nSell (String)symbol (int)amount (double)price\nQuit");
             String choice = input.next();
             // If the command is "buy"

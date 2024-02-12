@@ -7,9 +7,11 @@ public class Q6 {
         Queue<Block> blocks = new ArrayDeque<>();
         Scanner input = new Scanner(System.in);
         boolean run = true;
+        // Run loop
         while (run) {
             // Display stocks
             System.out.println("Current Shares (First - Last): " + blocks);
+            // Display commands
             System.out.println("Commands:\nBuy (int)amount (double)price\nSell (int)amount (double)price\nQuit");
             String choice = input.next();
             // If the command is "buy"
