@@ -4,9 +4,9 @@ enum DIRECTION {NORTH, SOUTH, EAST, WEST}
 public class Q9 {
     public static void display(int[][] image)
     {
-        for (int x = 0; x < image.length; x++) {
+        for (int[] ints : image) {
             for (int y = 0; y < image[0].length; y++) {
-                System.out.printf("%4d", image[x][y]);
+                System.out.printf("%4d", ints[y]);
             }
             System.out.println();
         }
@@ -52,14 +52,19 @@ public class Q9 {
         boolean foundExit = false;
 
         while (!pathsToTake.isEmpty() && !foundExit) {
+            // Get current cell from top of the stack
             DirectionPair currentCell = pathsToTake.pop();
+            // Loop if the current cell is a path that was already taken and there are still paths to take
             while (pathsTaken.contains(currentCell) && !pathsToTake.isEmpty()) {
                 currentCell = pathsToTake.pop();
                 //System.out.println("Path already taken");
             }
+            // Add the cell to the taken paths stack
             pathsTaken.push(currentCell);
+            // Get x and y from the current cell
             x = currentCell.getX();
             y = currentCell.getY();
+            // Get the direction to head
             DIRECTION direction = currentCell.getDirection();
             boolean inter = false;
             boolean deadEnd = false;
@@ -68,7 +73,7 @@ public class Q9 {
             //System.out.println(pathsTaken);
             //System.out.println(currentCell);
             System.out.printf("Heading %s from (%d, %d):\n", direction, x, y);
-
+            // West
             if (direction == DIRECTION.WEST) {
                 while (!inter && !deadEnd && !foundExit) {
                     x -= 1;
@@ -101,7 +106,8 @@ public class Q9 {
                         foundExit = true;
                     }
                 }
-            } else if (direction == DIRECTION.SOUTH) {
+            } // South
+            else if (direction == DIRECTION.SOUTH) {
                 while (!inter && !deadEnd && !foundExit) {
                     y += 1;
                     maze[y][x] = 2;
@@ -133,7 +139,8 @@ public class Q9 {
                         foundExit = true;
                     }
                 }
-            } else if (direction == DIRECTION.EAST) {
+            } // East
+            else if (direction == DIRECTION.EAST) {
                 while (!inter && !deadEnd && !foundExit) {
                     x += 1;
                     maze[y][x] = 2;
@@ -165,7 +172,8 @@ public class Q9 {
                         foundExit = true;
                     }
                 }
-            } else if (direction == DIRECTION.NORTH) {
+            } // North
+            else if (direction == DIRECTION.NORTH) {
                 while (!inter && !deadEnd && !foundExit) {
                     y -= 1;
                     maze[y][x] = 2;
