@@ -40,7 +40,7 @@ public class Q7 {
                 // If the company is in the map
                 if (queueMap.containsKey(company)) {
                     Queue<Block> blocks = queueMap.get(company);
-                    // Look at the top block on the stack
+                    // Look at the next block on the stack
                     Block block = blocks.peek();
                     // Loop until amount left to sell is 0 or the stack is empty
                     while (amount > 0 && !blocks.isEmpty()) {
@@ -55,7 +55,7 @@ public class Q7 {
                             profit += (amount * price) - total;
                             // Set the amount to 0
                             amount = 0;
-                            // Remove the top block on the stack
+                            // Remove the next block on the stack
                             blocks.remove();
                         } // Amount is the less than shares in current block
                         else if (block.getShares() > amount) {
@@ -77,11 +77,11 @@ public class Q7 {
                             double total = block.getPrice() * block.getShares();
                             // Calculate profit
                             profit += (block.getShares() * price) - total;
-                            // Remove the top block on the stack
+                            // Remove the next block on the stack
                             blocks.remove();
                             // Remove the amount of shares in the block from the amount
                             amount -= block.getShares();
-                            // Look at the top block on the stack
+                            // Look at the next block on the stack
                             block = blocks.peek();
                         }
                         //System.out.println(amount);
