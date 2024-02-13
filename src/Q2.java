@@ -18,6 +18,7 @@ public class Q2 {
         grid[9] = new int[]{0, 0, 0, 0, 0, 0, 1, 0, 0, 0};
         //System.out.println(test[6][5]);
 
+        // Get starting x and y from user
         Scanner start = new Scanner(System.in);
         System.out.print("Start X: ");
         int x = start.nextInt();
@@ -25,13 +26,18 @@ public class Q2 {
         int y = start.nextInt();
         //System.out.println(x + ", " + y);
 
+        // Create stack and push the staring point to the stack
         ArrayDeque<Pair> cellsToVisit = new ArrayDeque<>();
         cellsToVisit.push(new Pair(x, y));
 
+        // Start count at 1
         int count = 1;
 
+        // Loop until the stack is empty
         while (!cellsToVisit.isEmpty()) {
+            // Get current cell from top of stack
             Pair currentCell = cellsToVisit.pop();
+            // Set x and y to the cell's x and y
             x = currentCell.getX();
             y = currentCell.getY();
 
@@ -40,7 +46,9 @@ public class Q2 {
 
             // Check if current cell has already been filled
             if(grid[x][y] == 0) {
+                // Set the current cell to the count
                 grid[x][y] = count;
+                // Increase the count
                 count++;
             }
             // End loop if already filled
@@ -48,19 +56,19 @@ public class Q2 {
                 break;
             }
 
-            // West
+            // West is not filled
             if (x > 0 && grid[x - 1][y] == 0) {
                 cellsToVisit.push(new Pair(x - 1, y));
             }
-            // South
+            // South is not filled
             if (y > 0 && grid[x][y - 1] == 0) {
                 cellsToVisit.push(new Pair(x, y - 1));
             }
-            // East
+            // East is not filled
             if (x < 9 && grid[x + 1][y] == 0) {
                 cellsToVisit.push(new Pair(x + 1, y));
             }
-            // North
+            // North is not filled
             if (y < 9 && grid[x][y + 1] == 0) {
                 cellsToVisit.push(new Pair(x, y + 1));
             }
